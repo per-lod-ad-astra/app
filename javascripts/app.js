@@ -183,9 +183,9 @@ window.onload = async () => {
           document.querySelector('.alert-success').classList.remove('hidden')
           table.classList.add('hidden')
           document.getElementById('toRdf').disabled = true
-          window.setTimeout(() => {document.querySelector('.alert-success').classList.add('hidden')}, 5000)
         })
-        // .then(_ => download('relaties.nt', triples.join('\n')))
+        .then(_ => download('relaties.nt', triples.join('\n')))
+        .then(_ => window.setTimeout(() => {document.querySelector('.alert-success').classList.add('hidden')}, 5000))
       }
     }
   }
