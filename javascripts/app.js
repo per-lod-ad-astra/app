@@ -1,6 +1,7 @@
+const sparqlRepo = 'https://raw.githubusercontent.com/per-lod-ad-astra/sparql-queries/main/'
 window.onload = async () => {
   const debug = window.location.hostname === 'localhost'
-  fetch('./sparql-queries/per-lod-ad-astra.sources.json?' + (new Date()).toUTCString)
+  fetch(sparqlRepo + '/per-lod-ad-astra.sources.json?' + (new Date()).toUTCString)
     .then(r => r.json())
     .then(src => {
       const ploaGroupSubject = subjectBronField.appendChild(document.createElement('optgroup'))
@@ -272,11 +273,11 @@ function download(filename, text) {
 }
 
 const PLaASearch = async (term, option) => 
-  fetch('./sparql-queries/per-lod-ad-astra.sources.json')
+  fetch(sparqlRepo + '/per-lod-ad-astra.sources.json')
     .then(r => r.json())
     .then(s => s.filter(s => s.naam===option.value).pop())
     .then(async bron => {
-      const rq = await fetch('./sparql-queries/' + bron.query + '?' + (new Date()).toUTCString()).then(r => r.text()).then(rq => rq.replace('?zoekopdracht', `"${term}"`))
+      const rq = await fetch(sparqlRepo + bron.query + '?' + (new Date()).toUTCString()).then(r => r.text()).then(rq => rq.replace('?zoekopdracht', `"${term}"`))
       return fetch(bron.endpoint, {
           "body": `query=${encodeURIComponent(rq)}`,
           "headers": {
