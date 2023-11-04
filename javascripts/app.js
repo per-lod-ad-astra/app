@@ -52,8 +52,8 @@ window.onload = async () => {
     ev.preventDefault()
     document.querySelector('.alert-light')?.classList.add('hidden')
     if (!queryField.value) alert('Vul eerst een zoekopdracht in!')
-    else if(subjectBronField.selectedIndex === 0) alert('Selecteer eest een bron bij "Bron 1"!')
-    else if(objectBronField.selectedIndex === 0) alert('Selecteer eest een bron bij "Bron 2"!')
+    else if(subjectBronField.selectedIndex === 0) alert('Selecteer eerst een bron bij "Bron 1"!')
+    else if(objectBronField.selectedIndex === 0) alert('Selecteer eerst een bron bij "Bron 2"!')
     else {
       document.querySelector('.spinner2').classList.remove('hidden')
       table.classList.add('hidden')
@@ -167,7 +167,7 @@ window.onload = async () => {
   document.getElementById('toRdf').onclick = (ev) => {
     ev.preventDefault()
     if (table.classList.contains('hidden')) {
-      window.alert('Je hebt nog geen relaties gemaakt.')
+      window.alert('U hebt nog geen relaties gemaakt.')
     } else {
       const triples = []
       document.querySelectorAll('tr').forEach(tr => {
@@ -188,7 +188,7 @@ window.onload = async () => {
         }
       })
       if (triples.length === 0) {
-        window.alert('Je hebt nog geen relaties gemaakt.')
+        window.alert('U hebt nog geen relaties gemaakt.')
       } else {
         fetch('./post.nt.php', {
           method:'POST',
