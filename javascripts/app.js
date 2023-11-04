@@ -50,6 +50,7 @@ window.onload = async () => {
 
   document.querySelector('form').onsubmit = (ev) => {
     ev.preventDefault()
+    document.querySelector('.alert-light')?.classList.add('hidden')
     if (!queryField.value) alert('Vul eerst een zoekopdracht in!')
     else if(subjectBronField.selectedIndex === 0) alert('Selecteer eest een bron bij "Bron 1"!')
     else if(objectBronField.selectedIndex === 0) alert('Selecteer eest een bron bij "Bron 2"!')
