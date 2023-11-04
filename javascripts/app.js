@@ -51,7 +51,7 @@ window.onload = async () => {
 
   document.querySelector('form').onsubmit = (ev) => {
     ev.preventDefault()
-    document.querySelector('.alert-light')?.classList.add('hidden')
+    document.querySelector('.uitleg')?.classList.add('hidden')
     if (!queryField.value) alert('Vul eerst een zoekopdracht in!')
     else if(subjectBronField.selectedIndex === 0) alert('Selecteer eerst een bron bij "Bron 1"!')
     else if(objectBronField.selectedIndex === 0) alert('Selecteer eerst een bron bij "Bron 2"!')
@@ -107,6 +107,9 @@ window.onload = async () => {
           document.getElementById('toRdf').disabled = true
           if (!termsSubject || termsSubject.length === 0) {
             alert.classList.remove('hidden')
+            alert.innerHTML = `
+              Niks gevonden in bron "<strong>${subjectBronField[subjectBronField.selectedIndex].value}</strong>", probeer een nieuwe zoekopdracht en/of selecteer andere bronnen.
+            `
             table.classList.add('hidden')
           } else {
             alert.classList.add('hidden')
