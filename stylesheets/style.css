@@ -69,3 +69,7 @@ table td, table th {border: solid 1px}
 .druid a:hover {
   color: #536e8c;
 }
+
+span.required {
+  color: #d12929;
+}

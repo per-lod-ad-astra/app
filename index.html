@@ -32,40 +32,44 @@
           <img src="./images/loader.gif"/>
         </div>
         <div class="app container hidden">
-            <form class="row row-cols-lg-auto g-3 align-items-center">
-                <div class="col-12">
-                    <div class="form-floating">
-                        <input type="text" placeholder="Zoekterm" id="query" class="form-control">
-                        <label for="query" class="form-label">Zoekopdracht</label>
+            <div class="alert alert-light ">
+                <form class="row row-cols-lg-auto g-3 align-items-center">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="text" placeholder="Zoekterm" id="query" class="form-control">
+                            <label for="query" class="form-label">Zoekopdracht <span class="required">*</span></label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12">
-                    <div class="form-floating">
-                        <select id="subjectBron" class="form-select">
-                            <option>-- kies een bron uit de lijst --</option>
-                        </select>
-                        <label for="subjectBron" class="form-label">Bron 1</label>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <select id="subjectBron" class="form-select">
+                                <option>-- kies een bron uit de lijst --</option>
+                            </select>
+                            <label for="subjectBron" class="form-label">Bron 1 <span class="required">*</span></label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12">
-                    <div class="form-floating">
-                        <select id="objectBron" class="form-select">
-                            <option>-- kies een bron uit de lijst --</option>
-                        </select>
-                        <label for="objectBron" class="form-label">Bron 2</label>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <select id="objectBron" class="form-select">
+                                <option>-- kies een bron uit de lijst --</option>
+                            </select>
+                            <label for="objectBron" class="form-label">Bron 2 <span class="required">*</span></label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12">
-                    <div role="group" class="btn-group">
-                        <button id="btnSearch" type="submit" class="btn btn-lg btn-primary" disabled>
-                            <i class="bi bi-search"></i>
-                        </button>
-                        <button type="button" id="toRdf" class="btn btn-lg btn-primary" disabled>
-                            <i class="bi bi-cloud-download" title="Relaties opslaan"></i>
-                        </button>
+                    <div class="col-12">
+                        <div role="group" class="btn-group">
+                            <button id="btnSearch" type="submit" class="btn btn-lg btn-primary" disabled>
+                                <i class="bi bi-search"></i> zoek
+                            </button>
+                            <button type="button" id="toRdf" class="btn btn-lg btn-primary" disabled>
+                                <i class="bi bi-cloud-download" title="Relaties opslaan"></i> opslaan
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+                <div><small><span class="required">*</span> verplicht in te voeren</small> </div>             
+            </div>
+
             <div class="alert alert-success hidden">Uw sleutels zijn opgeslagen en door u gedownload, binnen enkele minuten zullen ze <a href="https://druid.datalegend.net/Per-LOD-ad-Astra/Sleutelkastje/">hier</a> gepubliceerd worden.</div>
             <div class="alert alert-warning hidden">Niks gevonden, probeer een nieuwe zoekopdracht en/of selecteer andere bronnen.</div>
             <div class="alert alert-light">
