@@ -130,7 +130,7 @@ window.onload = async () => {
                 cell = row.appendChild(document.createElement('td'))
                 cell.rowSpan = termsSubject.length
                 const msg = cell.appendChild(document.createElement('div'))
-                msg.innerHTML = `geen resultaat gevonden in de bron<br>"<strong>${subjectBronField.options[subjectBronField.selectedIndex].text}</strong>"`
+                msg.innerHTML = `geen resultaat gevonden in de bron<br>"<strong>${objectBronField.options[objectBronField.selectedIndex].text}</strong>"`
                 msg.classList.add('alert')
                 msg.classList.add('alert-warning')
               }
