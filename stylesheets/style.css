@@ -1,6 +1,14 @@
+main {
+  margin-top: 120px;
+}
+
+nav {
+  box-shadow: 0 4px 2px -2px #ddd;
+  background: rgba(255,255,255,0.9)
+}
 header img {
-  width: 400px;
-  margin: 30px 0;
+  width: 200px;
+  margin: 0;
 }
 
 #query {
@@ -38,4 +46,26 @@ table td, table th {border: solid 1px}
 
 .dropdown-item {
   white-space: inherit !important;
+}
+
+.druid {
+  float: right;
+  text-align: right;
+  vertical-align: bottom;
+  white-space: nowrap;
+  background-image: url('../images/logo.svg');
+  background-repeat: no-repeat;
+  background-position: 0px;
+  padding-left: 50px; 
+}
+
+.druid a {
+  text-decoration: none;
+  color: #7c9fc5;
+  font-weight: bold;
+  font-size: 130%;
+}
+
+.druid a:hover {
+  color: #536e8c;
 }

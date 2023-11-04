@@ -125,16 +125,18 @@ window.onload = async () => {
             row.appendChild(cell)
             cell = row.appendChild(document.createElement('td'))
             cell.appendChild(predicateSelectList())
-            cell = row.appendChild(document.createElement('td'))
             if (termsObject.length === 0) {
               if(rowNum === 1) {
+                cell = row.appendChild(document.createElement('td'))
+                cell.rowSpan = termsSubject.length
                 const msg = cell.appendChild(document.createElement('div'))
-                msg.innerText = 'geen resultaat gevonden in de tweede bron'
+                msg.innerHTML = `geen resultaat gevonden in de bron<br>"<strong>${subjectBronField.options[subjectBronField.selectedIndex].text}</strong>"`
                 msg.classList.add('alert')
                 msg.classList.add('alert-warning')
               }
 
             } else {
+              cell = row.appendChild(document.createElement('td'))
               cell.appendChild(objectSelectList())
             }
           })
