@@ -1,0 +1,41 @@
+header img {
+  width: 400px;
+  margin: 30px 0;
+}
+
+#query {
+  width: 200px;
+}
+
+select {
+  max-width: 300px
+}
+
+table, div.alert {
+  margin-top: 40px;
+}
+
+.hidden {display:none}
+
+.uri {
+  color: rgba(var(--bs-body-color-rgb),.65);
+  transform: scale(.65);
+  text-decoration: none;
+}
+
+.cell-1 { width: 2%}
+.cell-2 { width: 37%}
+.cell-3 { width: 20%}
+.cell-4 { width: 37%}
+
+select.object { width: 100%; max-width: 100%;}
+
+table td, table th {border: solid 1px}
+
+.spinner {
+
+}
+
+.dropdown-item {
+  white-space: inherit !important;
+}

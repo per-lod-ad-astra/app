@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="icon" href="./favicon.ico">
+    <link rel="manifest" href="./site.webmanifest">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="./stylesheets/style.css?4">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="./javascripts/app.js?2240"></script>
+    <title>Per LOD ad Astra</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="./images/per-lod-ad-astra.png">
+        </div>
+    </header>
+    <main>
+        <div class="spinner">
+          <img src="./images/loader.gif"/>
+        </div>
+        <div class="app container hidden">
+            <form class="row row-cols-lg-auto g-3 align-items-center">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input type="text" placeholder="Zoekterm" id="query" class="form-control">
+                        <label for="query" class="form-label">Zoekopdracht</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating">
+                        <select id="subjectBron" class="form-select">
+                            <option>-- kies een bron uit de lijst --</option>
+                        </select>
+                        <label for="subjectBron" class="form-label">Bron 1</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating">
+                        <select id="objectBron" class="form-select">
+                            <option>-- kies een bron uit de lijst --</option>
+                        </select>
+                        <label for="objectBron" class="form-label">Bron 2</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div role="group" class="btn-group">
+                        <button id="btnSearch" type="submit" class="btn btn-lg btn-primary" disabled>
+                            <i class="bi bi-search"></i>
+                        </button>
+                        <button type="button" id="toRdf" class="btn btn-lg btn-primary" disabled>
+                            <i class="bi bi-cloud-download" title="Relaties opslaan"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="alert alert-success hidden">Je sleutels zijn opgeslagen, binnen enkele minuten zullen ze <a href="https://druid.datalegend.net/Per-LOD-ad-Astra/Sleutelkastje/">hier</a> gepubliceerd worden.</div>
+            <div class="alert alert-warning hidden">Niks gevonden, probeer een nieuwe zoekopdracht en/of slecteer andere bronnen.</div>
+            <div class="spinner2 hidden">
+            <img src="./images/loader.gif"/>
+            </div>
+            <table class="table hidden">
+                <thead>
+                    <tr>
+                        <th scope="col" class="cell-1">#</th>
+                        <th scope="col" class="cell-2">Link van</th>
+                        <th scope="col" class="cell-3">Soort relatie</th>
+                        <th scope="col" class="cell-4">Link naar</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
