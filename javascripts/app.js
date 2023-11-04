@@ -13,7 +13,7 @@ window.onload = async () => {
         ploaGroupObject.appendChild(new Option(bron.naam))
       })
     })
-  bronnen()
+    .then(_ => bronnen())
     .then($bronnen => {
       const ndeGroupSubject = subjectBronField.appendChild(document.createElement('optgroup'))
       const ndeGroupObject = objectBronField.appendChild(document.createElement('optgroup'))
