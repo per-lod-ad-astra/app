@@ -1,6 +1,7 @@
 const sparqlRepo = 'https://raw.githubusercontent.com/per-lod-ad-astra/sparql-queries/main/'
 window.onload = async () => {
   const debug = window.location.hostname === 'localhost'
+  document.getElementById('swapBronnen').onclick = (ev) => swapBronnen(ev);
   fetch(sparqlRepo + '/per-lod-ad-astra.sources.json?' + (new Date()).toUTCString)
     .then(r => r.json())
     .then(src => {
@@ -324,3 +325,14 @@ const PLaASearch = async (term, option) =>
         return [terms]
       })
     })
+
+
+const swapBronnen = (ev) => {
+  ev.preventDefault()
+  const subjectBronField = document.getElementById('subjectBron')
+  const objectBronField = document.getElementById('objectBron')
+  const ix1 = subjectBronField.selectedIndex
+  const ix2 = objectBronField.selectedIndex
+  subjectBronField.selectedIndex = ix2
+  objectBronField.selectedIndex = ix1
+}
