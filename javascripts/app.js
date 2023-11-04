@@ -34,7 +34,7 @@ window.onload = async () => {
   if (debug) queryField.value = 'gouda'
   const subjectBronField = document.getElementById('subjectBron')
   const objectBronField = document.getElementById('objectBron')
-  const alert = document.querySelector('div.alert')
+  const alert = document.querySelector('div.alert-warning')
   const table = document.querySelector('table')
   const tbody = table.querySelector('tbody');
 
@@ -56,7 +56,7 @@ window.onload = async () => {
     else if(objectBronField.selectedIndex === 0) alert('Selecteer eest een bron bij "Bron 2"!')
     else {
       document.querySelector('.spinner2').classList.remove('hidden')
-      tbody.classList.add('hidden')
+      table.classList.add('hidden')
 
 
       zoek(queryField.value, subjectBronField.options[subjectBronField.selectedIndex])
@@ -104,7 +104,6 @@ window.onload = async () => {
 
           tbody.innerHTML = ''
           document.getElementById('toRdf').disabled = true
-
           if (!termsSubject || termsSubject.length === 0) {
             alert.classList.remove('hidden')
             table.classList.add('hidden')
@@ -127,7 +126,17 @@ window.onload = async () => {
             cell = row.appendChild(document.createElement('td'))
             cell.appendChild(predicateSelectList())
             cell = row.appendChild(document.createElement('td'))
-            cell.appendChild(objectSelectList())
+            if (termsObject.length === 0) {
+              if(rowNum === 1) {
+                const msg = cell.appendChild(document.createElement('div'))
+                msg.innerText = 'geen resultaat gevonden in de tweede bron'
+                msg.classList.add('alert')
+                msg.classList.add('alert-warning')
+              }
+
+            } else {
+              cell.appendChild(objectSelectList())
+            }
           })
           const dropdownElementList = document.querySelectorAll('.dropdown-toggle');
           [...dropdownElementList].map(dropdownToggleEl => new bootstrap.Dropdown(dropdownToggleEl));
@@ -145,6 +154,9 @@ window.onload = async () => {
           document.querySelector('.spinner2').classList.add('hidden')
           tbody.classList.remove('hidden')
 
+        })
+        .catch(e => {
+          window.alert('Helaas ging er iets mis...')
         })
 
     }
