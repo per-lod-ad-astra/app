@@ -21,5 +21,5 @@ docker run -p 3000:80 -d --name per-lod-ad-astra per-lod-ad-astra
 De triples die gegenereerd worden met deze tool worden opgeslagen in de map `relaties`. Let op dat deze folder schrijfrechten moet hebben voor de webserver, op Linux/MacOS doe je dat door het commando `chmod a+rwx relaties` te typen. **Let op** hiermee geef je dus schrijfrechten op een folder op je webserver!
 
 # Ontwikkelaars
-Voor lokale ontwikkeling start je een development webserver met `http://127.0.0.1:3000`.
+Voor lokale ontwikkeling start je een development webserver met `php -S localhost:3000`.
 

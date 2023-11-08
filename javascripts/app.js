@@ -1,53 +1,36 @@
 const sparqlRepo = 'https://raw.githubusercontent.com/per-lod-ad-astra/sparql-queries/main/'
+var subjectBronField, objectBronField, queryField
 window.onload = async () => {
-  const debug = window.location.hostname === 'localhost'
   document.getElementById('swapBronnen').onclick = (ev) => swapBronnen(ev);
-  fetch(sparqlRepo + '/per-lod-ad-astra.sources.json?' + (new Date()).toUTCString)
-    .then(r => r.json())
-    .then(src => {
-      const ploaGroupSubject = subjectBronField.appendChild(document.createElement('optgroup'))
-      const ploaGroupObject = objectBronField.appendChild(document.createElement('optgroup'))
-      ploaGroupSubject.label = "Per LOD ad Astra Bronnen"
-      ploaGroupObject.label = "Per LOD ad Astra Bronnen"
-      src.forEach(bron => {
-        ploaGroupSubject.appendChild(new Option(bron.naam))
-        ploaGroupObject.appendChild(new Option(bron.naam))
-      })
-    })
-    .then(_ => bronnen())
-    .then($bronnen => {
-      const ndeGroupSubject = subjectBronField.appendChild(document.createElement('optgroup'))
-      const ndeGroupObject = objectBronField.appendChild(document.createElement('optgroup'))
-      ndeGroupSubject.label = "NDE Termennetwerk"
-      ndeGroupObject.label = "NDE Termennetwerk"
-      $bronnen.forEach(bron => {
-        ndeGroupSubject.appendChild(new Option(bron.name, bron.uri))
-        ndeGroupObject.appendChild(new Option(bron.name, bron.uri))
-      });
-      if (debug) subjectBronField.selectedIndex = 1
-      if (debug) objectBronField.selectedIndex = 1
-    }).then(_ => {
-      document.querySelector('.spinner').classList.add('hidden')
-      document.querySelector('.app').classList.remove('hidden')
-    })
 
-  const queryField = document.getElementById('query')
-  if (debug) queryField.value = 'gouda'
-  const subjectBronField = document.getElementById('subjectBron')
-  const objectBronField = document.getElementById('objectBron')
+  queryField = document.getElementById('query')
+  subjectBronField = document.getElementById('subjectBron')
+  objectBronField = document.getElementById('objectBron')
   const alert = document.querySelector('div.alert-warning')
   const table = document.querySelector('table')
   const tbody = table.querySelector('tbody');
 
-  [queryField, subjectBronField, objectBronField].forEach(el => {
-    el.onchange = () => {
-      if (queryField.value !== '' && subjectBronField.selectedIndex !== 0 && objectBronField.selectedIndex !== 0 ) {
-        document.getElementById('btnSearch').disabled = false
-      } else {
-        document.getElementById('btnSearch').disabled = true
+  toggleSearchButton()
+
+  fetch(sparqlRepo + '/per-lod-ad-astra.sources.json?' + (new Date()).toUTCString)
+    .then(r => r.json())
+    .then(bronnen => populateDropdowns("Per LOD ad Astra Bronnen", bronnen))
+    .then(_ => termennetwerkBronnen())
+    .then(bronnen => populateDropdowns("NDE Termennetwerk", bronnen, 'name', 'uri'))
+    .then(_ => {
+      const debug = window.location.hostname === 'localhost'
+      if (debug) {
+        queryField.value = 'vuurvast'
+        subjectBronField.selectedIndex = 1
+        objectBronField.selectedIndex = 9
+        objectBronField.dispatchEvent(new Event('change'))
       }
-    }
-  })
+      document.querySelector('.spinner').classList.add('hidden')
+      document.querySelector('.app').classList.remove('hidden')
+    }).catch(e => {
+      window.alert('Helaas ging er iets mis:\n' + e.message)
+    })
+
 
   document.querySelector('form').onsubmit = (ev) => {
     ev.preventDefault()
@@ -209,6 +192,7 @@ window.onload = async () => {
     }
   }
 }
+
 const zoek = async (term, option) => {
   if(option.value, option.innerText) {
     return PLaASearch(term, option)
@@ -264,7 +248,7 @@ const zoek = async (term, option) => {
     .map(res => res.result.terms)
 }
 
-const bronnen = async () => {
+const termennetwerkBronnen = async () => {
   const res = await fetch("https://termennetwerk-api.netwerkdigitaalerfgoed.nl/graphql", {
     "body": "{\"query\":\"query Sources { sources { name uri } }\"}",
     "headers": {
@@ -338,4 +322,28 @@ const swapBronnen = (ev) => {
   const ix2 = objectBronField.selectedIndex
   subjectBronField.selectedIndex = ix2
   objectBronField.selectedIndex = ix1
+}
+
+const populateDropdowns = (label, bronnen, key, value) => {
+  key = key ?? 'naam'
+  const ploaGroupSubject = subjectBronField.appendChild(document.createElement('optgroup'))
+  const ploaGroupObject = objectBronField.appendChild(document.createElement('optgroup'))
+  ploaGroupSubject.label = label
+  ploaGroupObject.label = label
+  bronnen.forEach(bron => {
+    ploaGroupSubject.appendChild(new Option(bron[key ?? 'naam'], value ? bron[value] : null))
+    ploaGroupObject.appendChild(new Option(bron[key ?? 'naam'], value ? bron[value] : null))
+  })
+}
+
+const toggleSearchButton = () => {
+  [queryField, subjectBronField, objectBronField].forEach(el => {
+    el.onchange = () => {
+      if (queryField.value !== '' && subjectBronField.selectedIndex !== 0 && objectBronField.selectedIndex !== 0 ) {
+        document.getElementById('btnSearch').disabled = false
+      } else {
+        document.getElementById('btnSearch').disabled = true
+      }
+    }
+  })
 }
